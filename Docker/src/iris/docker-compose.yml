@@ -1,0 +1,72 @@
+version: '2'
+
+services:
+  web:
+    image: nginx:latest
+    container_name: "nginx-iris"
+    ports:
+      - "8083:80"
+    env_file: .env
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+      - /var/log/iris:/var/log/nginx
+    links:
+      - php
+    volumes_from:
+      - app-data
+  
+  # logstash
+  logstash:
+    build: ./logstash
+    container_name: "logstash-iris"
+
+  # php
+  php:  
+    build: ./php/
+    container_name: "php7-fpm-iris"
+    env_file: .env
+    expose:
+      - 9000
+    links:
+      - mysql
+    volumes_from:
+      - app-data
+
+  # mysql
+  mysql:
+    image: mysql:5.7.21
+    container_name: "mysql-iris"
+    volumes_from:
+      - mysql-data
+    #ports:
+    #  - "3306:3306"
+    container_name: "mysql"
+    env_file: .env
+  
+  # wordpress data
+  app-data:
+    image: php:7.0-fpm
+    container_name: "app-data-iris"
+    volumes:
+      - ./wordpress:/var/www/html
+    command: "true"
+  
+  # mysql data
+  mysql-data:
+    image: mysql:5.7.21
+    container_name: "mysql-data-iris"
+    volumes:
+      - ./db/mysql:/var/lib/mysql
+    command: "true"
+  
+  # phpmyadmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: "phpmyadmin-iris"
+    ports:
+      - 8084:80
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql

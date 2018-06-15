@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  nginx:
+    image: mongo:3.2-jessie
+    container_name: "mongodb"
+    ports:
+      - 9090:27017

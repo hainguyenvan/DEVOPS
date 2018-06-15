@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  nginx:
+    build: ./nginx
+    container_name: "nginx-monitoring"
+    links:
+      - logstash
+    ports:
+      - 9080:8080
+
+  logstash:
+    build: ./logstash
+    container_name: "logstash-monitoring"
