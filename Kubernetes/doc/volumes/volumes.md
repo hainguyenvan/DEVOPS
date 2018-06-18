@@ -1,0 +1,6 @@
+## Volumes
+* Volumes thể hiện vị trí nơi mà các container có thể truy cập và lưu trữ thông tin
+* Volumes có thể là local filesystem, local storage,...
+* Persistent volume (PV) là khái niệm để đưa ra một dung lượng lưu trữ THỰC TẾ 1GB, 10GB ...
+* Persistent volume claim (PVC) là khái niệm ảo, đưa ra một dung lượng CẦN THIẾT, mà ứng dụng yêu cầu.
+* Khi 1 PV thoả mãn yêu cầu của 1 PVC thì chúng "match" nhau, rồi "bound" (buộc / kết nối) lại với nhạu.

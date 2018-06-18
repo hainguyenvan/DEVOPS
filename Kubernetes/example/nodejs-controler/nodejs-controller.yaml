@@ -1,0 +1,20 @@
+apiVersion: v1 # Scheme áp dụng cho phiên bản Kuberneté
+kind: ReplicationController # Kiểu resource
+metadata:
+  name: node-js
+  labels:
+    name: node-js
+spec:
+  replicas: 2 # Đảm bảo số lượng pod mong muốn
+  selector:
+    name: node-js # Đảm bảo cho bộ điều khiển quản lý một loạt các teamplate
+  template:
+    metadata:
+      labels:
+        name: node-js
+    spec:
+      containers:
+        - name: node-js
+          image: jonbaier/node-express-info:latest
+          ports:
+            - containerPort: 80

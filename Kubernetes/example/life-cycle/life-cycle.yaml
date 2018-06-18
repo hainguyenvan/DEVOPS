@@ -1,0 +1,29 @@
+
+apiVersion: v1 # Scheme áp dụng cho phiên bản Kuberneté
+kind: ReplicationController # Kiểu resource
+metadata:
+  name: apache-hook
+  labels:
+    name: apache-hook
+spec:
+  replicas: 2 # Đảm bảo số lượng pod mong muốn
+  selector:
+    name: apache-hook # Đảm bảo cho bộ điều khiển quản lý một loạt các teamplate
+  template:
+    metadata:
+      labels:
+        name: apache-hook
+    spec:
+      containers:
+        - name: apache-hook
+          image: bitnami/apche:latest
+          ports:
+            - containerPort: 80
+          lifecycle:
+            postStart:
+              httpGet:
+                path: http://my-domain
+                port: 80
+              preStop:
+                exec:
+                  command: ["/user/local/bin/apchectl","-k","graceful-stop"]

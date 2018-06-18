@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  labels:
+    name: nginx-service
+spec:
+  ports:
+    # The port service shoul server on
+    - name: http
+      # Node port is port of physical
+      # nodePort: 30001
+      port: 8080
+      targetPort: 80
+  # Label keys and values that must match in order to receive traffic for this service
+  selector:
+    app: nginx
+  type: LoadBalancer

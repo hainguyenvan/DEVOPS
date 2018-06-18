@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+ name: kubia
+spec:
+ ports:
+  - port: 80
+    targetPort: 8080
+ selector:
+  app: kubia
+# Các yêu cầu gửi đến port 80 của máy thật sẽ được chuyển đến công 8080 của những pod nào mà có label app = kubia và listen ở công 8080

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-image
+spec:
+  containers:
+    - name: neo4j-server
+      image: neo4j:latest
+      imagePullPolicy: Always
+      command: ["echo", "SUCCESS"]
