@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  couchbase:
+    image: couchbase:enterprise-4.6.4
+    container_name: "landber-couchbase"
+    restart: always
+    # Set limit ram
+    # mem_limit: 4096m
+    ports:
+      - 8091:8091
+      - 8092:8092
+      - 8093:8093
+      - 8094:8094
+      - 11210:11210
+    volumes:
+       - ./db:/opt/couchbase/var
