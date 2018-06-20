@@ -20,5 +20,3 @@ $ more <file name>
 ```
 less <file name>
 ```
-
-
