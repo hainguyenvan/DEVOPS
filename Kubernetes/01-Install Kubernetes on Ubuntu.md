@@ -74,6 +74,29 @@ $ sudo kubeadm join --token 59f9e5.ca7acb3f48d73813 192.168.0.150:6443 --discove
 ```
 $ sudo kubectl proxy
 ```
+* Lấy token để đăng nhập vào dashboard
+```
+$ kubectl -n kube-system get secret
+# All secrets with type 'kubernetes.io/service-account-token' will allow to log in.
+# Note that they have different privileges.
+NAME                                     TYPE                                  DATA      AGE
+deployment-controller-token-frsqj        kubernetes.io/service-account-token   3         22h
+
+$ kubectl -n kube-system describe secret deployment-controller-token-frsqj
+Name:         deployment-controller-token-frsqj
+Namespace:    kube-system
+Labels:       <none>
+Annotations:  kubernetes.io/service-account.name=deployment-controller
+              kubernetes.io/service-account.uid=64735958-ae9f-11e7-90d5-02420ac00002
+
+Type:  kubernetes.io/service-account-token
+
+Data
+====
+ca.crt:     1025 bytes
+namespace:  11 bytes
+token:      eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+```
 * Url web
 ```
 http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/ 
