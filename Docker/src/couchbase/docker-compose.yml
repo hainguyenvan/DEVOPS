@@ -2,8 +2,8 @@ version: '2'
 
 services:
   couchbase:
-    image: couchbase:enterprise-4.6.4
-    container_name: "landber-couchbase"
+    image: couchbase:5.1.1
+    container_name: "landber-couchbase-5.1.1"
     restart: always
     # Set limit ram
     # mem_limit: 4096m
