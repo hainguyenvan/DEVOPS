@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  nodejs:
+    build: ./app
+    container_name: "qlcc"
+    volumes:
+      - ./app/server.js:/usr/src/app/server.js
+      - ./app/package.json:/usr/src/app/package.json
+    ports:
+      - 9090:8080
