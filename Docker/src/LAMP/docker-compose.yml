@@ -1,0 +1,44 @@
+version: '2'
+
+services:
+  # web
+  web:
+    build: ./apache
+    container_name: "apache2"
+    ports:
+      - "8001:80"
+    links:
+      - mysql
+    volumes:
+      - ./www:/var/www/site
+      - /var/log/nginx-sendy:/var/log/nginx
+
+  # mysql
+  mysql:
+    image: mysql:5.7.21
+    volumes_from:
+      - mysql-data
+    #ports:
+    #  - "3306:3306"
+    container_name: "mysql"
+    env_file: .env
+  
+  # mysql data
+  mysql-data:
+    image: mysql:5.7.21
+    container_name: "mysql-data"
+    volumes:
+      - ./db/mysql:/var/lib/mysql
+    command: "true"
+  
+  # phpmyadmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: "phpmyadmin"
+    ports:
+      - 8082:80
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+
