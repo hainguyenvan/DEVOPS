@@ -24,6 +24,24 @@
 ```
 # docker service ps helloworld
 ```
+* Sacle service in docker swarm
+  * Container chạy trong service gọi là **task**
+```
+# docker service scale <SERVICE-ID>=<NUMBER-OF-SERVICE>
+```
+* Xóa một service
+```
+# docker service rm  SERVICE-ID
+```
+* Cập nhật image của service
+```
+# docker service create --replicas 3 --name redis --update-delay 10s redis:3.0.6
+```
+* Drain một node trong docker swarm
+  * Đôi khi chúng ta muốn dừng một node để có thể nâng cấp nó, thì toàn bộ các task trên node đó sẽ được docker service chuyển đến node nào đang active
+
+## Docker Stack
+* Stack giống như docker compose. Một stack được tạo từ nhiều container và mỗi stack được tao ra thì lại có một server tương ứng
 
 ## CMD
 * Show token of docker swarm
